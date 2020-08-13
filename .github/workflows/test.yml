@@ -1,8 +1,9 @@
 name: Test
 on: push
 jobs:
-  container-job:
+  build:
     runs-on: ubuntu-latest
+    name: Perl ${{ matrix.perl }}
     services:
       postgres:
         image: postgres
@@ -13,9 +14,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-  build:
-    runs-on: ubuntu-latest
-    name: Perl ${{ matrix.perl }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup perl
