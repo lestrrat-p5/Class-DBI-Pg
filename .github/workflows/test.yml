@@ -27,5 +27,6 @@ jobs:
         run: |
           sudo apt-get -y install libpq-dev
       - run: perl -V
+      - run: perl Makefile.PL
       - run: cpanm --installdeps .
-      - run: prove -lv t
+      - run: make test
