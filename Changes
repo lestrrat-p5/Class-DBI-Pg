@@ -1,5 +1,7 @@
 Revision history for Perl extension Class::DBI::Pg
 
+        - Work with PostgreSQL >= 8.2
+
 0.08  Sat Mar 11 17:00:00 2006
         - Stop using _croak (#18093)
 
