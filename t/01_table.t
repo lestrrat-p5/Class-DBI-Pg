@@ -24,6 +24,16 @@ SKIP: {
         }
     );
 
+    {
+        my $sth = $dbh->prepare(<<EOSQL);
+SELECT version()
+EOSQL
+        $sth->execute();
+        my ($version) = $sth->fetchrow_array();
+
+        print STDERR "Testing using PostgreSQL $version\n";
+    }
+
     $dbh->do(<<'SQL');
 CREATE TABLE class_dbi_pg1 (
     id SERIAL NOT NULL PRIMARY KEY,

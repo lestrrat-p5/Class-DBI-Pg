@@ -1,9 +1,9 @@
-name: Test
+name: Test Class::DBI::Pg
 on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Perl ${{ matrix.perl }}
+    name: Test on Perl 5.32
     services:
       postgres:
         image: postgres
