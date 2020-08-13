@@ -5,7 +5,7 @@ require Class::DBI;
 use base 'Class::DBI';
 use vars qw($VERSION);
 
-$VERSION = '0.08';
+$VERSION = '0.09';
 
 sub set_up_table {
     my ( $class, $table ) = @_;
@@ -40,8 +40,12 @@ SQL
 
     # find SERIAL type.
     # nextval('"table_id_seq"'::text)
+
+    # adsrc was deprecated from version PostgreSQL 8, and disappeared in PostgreSQL version 12.
+    my $adsrc = ($class->pg_version() <= 8.1) ? 'adsrc' : 'pg_get_expr(adbin, adrelid) as adsrc';
+
     $sth = $dbh->prepare(<<"SQL");
-SELECT adsrc FROM ${catalog}pg_attrdef 
+SELECT $adsrc FROM ${catalog}pg_attrdef 
 WHERE 
 adrelid=(SELECT oid FROM ${catalog}pg_class WHERE relname=?)
 SQL
